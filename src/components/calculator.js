@@ -11,7 +11,6 @@ class Calculator extends Component {
     constructor(props, context) {
         super(props, context);
     
-        this.handleTransactionChange = this.handleTransactionChange.bind(this);
         this.handleTransactionTypeChange = this.handleTransactionTypeChange.bind(this);
         this.handlePayerChange = this.handlePayerChange.bind(this);
         this.handleReceiverChange = this.handleReceiverChange.bind(this);
@@ -19,9 +18,9 @@ class Calculator extends Component {
         this.handleReceiverVATApplicable = this.handleReceiverVATApplicable.bind(this);
         this.handleClickCalculate = this.handleClickCalculate.bind(this);
         this.handleSumChange = this.handleSumChange.bind(this);
+        this.handleProductChange = this.handleProductChange.bind(this);
 
         this.state = {
-          transaction: null,
           transactionType: null,
           payer: [],
           receiver: [],
@@ -34,7 +33,8 @@ class Calculator extends Component {
           vatPercentage: 0,
           options: [ { "name": "Estonia", "value": "EE"}, { "name": "Belgium", "value": "BE"} ],
           standardVATs: [],
-          goodsServicesList: []
+          goodsServicesList: [],
+          product: []
         };
 
         VATService.fetchVAT().then(res => {
@@ -43,16 +43,24 @@ class Calculator extends Component {
 
         VATService.fetchGoodsAndServices().then(res => {
             this.goodsAndServices = res.data;
-            this.state.goodsServicesList = this.goodsAndServices.map(g => g.name);
+            var list = this.goodsAndServices.map(g => { return {  "name": g.Name, "value": g }});
+            this.setState({ goodsServicesList: list })
         });
       }
 
-    handleTransactionChange(transaction, event) {
-        this.setState({ transaction });
+    handleProductChange(product, event) {
+        this.setState({ product });
     }
 
     handleTransactionTypeChange(transactionType, event) {
         this.setState({ transactionType });
+        if(transactionType == 0){
+            var list = this.goodsAndServices.filter(g => g.GS == "Goods").map(g => { return {  "name": g.Name, "value": g }});
+            this.setState({ goodsServicesList: list })
+        }else{
+            var list = this.goodsAndServices.filter(g => g.GS == "Services").map(g => { return {  "name": g.Name, "value": g }});
+            this.setState({ goodsServicesList: list })
+        }
     }
 
     handlePayerChange(payer, event) {
@@ -63,16 +71,16 @@ class Calculator extends Component {
         this.setState({ receiver });
     }
 
-    handlePayerVATApplicable(payerVatApplicable, event) {
-        this.setState({ payerVatApplicable });
+    handlePayerVATApplicable() {
+        this.setState({ payerVATApplicable: !this.state.payerVATApplicable });
     }
 
-    handleReceiverVATApplicable(receiverVATApplicable, event) {
-        this.setState({ receiverVATApplicable });
+    handleReceiverVATApplicable() {
+        this.setState({ receiverVATApplicable: !this.state.receiverVATApplicable });
     }
     
-    handleSumChange(sum, event) {
-        this.setState({ sum });
+    handleSumChange(event) {
+        this.setState({ sum: event.target.value });
     }
 
     handleClickCalculate(event){
@@ -80,10 +88,68 @@ class Calculator extends Component {
         
         var payerCountry = this.state.payer[0].value;
         var receiverCountry = this.state.receiver[0].value;
-        var payerVAT = this.state.standardVATs.find(x => x.code == payerCountry).vat;
 
-        this.setState({ vatPercentage: payerVAT });
-        this.setState({ totalAmount: 50 })
+        var effectiveVAT = 0;
+
+        if(!this.state.receiverVATApplicable){
+            //Kui müüja ei ole kohuslane on alati exempt
+            effectiveVAT = -1;
+        } else{
+
+            if(payerCountry == receiverCountry){
+                effectiveVAT = this.findVAT(receiverCountry);
+            }else{
+                console.log(this.state.transactionType)
+                console.log(this.state.payerVATApplicable)
+                if(!this.state.payerVATApplicable){
+                    effectiveVAT = this.findVAT(receiverCountry);
+                }else{
+                    if(this.state.transactionType == 1){
+                        effectiveVAT = this.findVAT(receiverCountry);
+                    }else{
+
+                        effectiveVAT = this.findVAT(receiverCountry);
+                       console.log(effectiveVAT)
+                        if(effectiveVAT != -1) 
+                            effectiveVAT = 0; 
+                    }
+                }
+            }
+        }
+
+        var calcVat = effectiveVAT;
+
+        if(effectiveVAT < 0){
+            calcVat = 0;
+        }
+
+
+        var totalAmount = this.state.sum * (1 + calcVat / 100);
+        var vatAmount = this.state.sum * (calcVat / 100);
+        
+        this.setState({ vatPercentage: effectiveVAT < 0 ? '-' : effectiveVAT });
+        this.setState({ totalAmount: totalAmount.toFixed(2) });
+        this.setState({ vatAmount: vatAmount.toFixed(2) });
+        this.setState({ totalAmountExVAT: (+this.state.sum).toFixed(2) });
+    }
+
+    findVAT(code){
+        if(this.state.product.length > 0){
+
+            for(var k in this.state.product[0].value){
+                if(k == code){
+                    var productTax = this.state.product[0].value[k];
+
+                    if(!isNaN(productTax))
+                        return productTax;
+                    else
+                        return -1;
+                }
+            }
+
+        }else{
+            return this.state.standardVATs.find(x => x.code == code).vat;
+        }
     }
 
     render() {
@@ -98,30 +164,11 @@ class Calculator extends Component {
                 <Row>
                     <div className="col-8 calculator" >
                     <Form>
-                        <Form.Row className="mb-4">
-                        <h5>Transaction</h5>
-                            <ToggleButtonGroup toggle className="col-12" name="transaction" onChange={this.handleTransactionChange} value={this.state.transaction}>
-                                <ToggleButton type="radio" value={0}>Buy</ToggleButton>
-                                <ToggleButton type="radio" value={1}>Sell</ToggleButton>
-                            </ToggleButtonGroup>
-                        </Form.Row>
-                        <Form.Row className="mb-4">
-                        <h5>Thing</h5>
-                        <ToggleButtonGroup toggle className="col-12" name="transactionType" onChange={this.handleTransactionTypeChange} value={this.state.transactionType}>
-                                <ToggleButton type="radio" value={0}>Goods</ToggleButton>
-                                <ToggleButton type="radio" value={1}>Services</ToggleButton>
-                            </ToggleButtonGroup>
-                        </Form.Row>
-                        <Form.Row className="mb-4">
-                            <Form.Control placeholder="No product (standard VAT)"></Form.Control>
-                        </Form.Row>
-                        <Form.Row>
-                            <FormLabel>Sum of transaction</FormLabel>
-                            <Form.Control placeholder="Sum" onChange={this.handleSumChange}></Form.Control>
-                        </Form.Row>
-                        <Row className="mb-4">
+                    <h5>Countries</h5>
+
+                    <Row className="mb-4">
                             <Form.Row className="col-6">
-                                <FormLabel>Payer</FormLabel>
+                                <FormLabel>Buyer</FormLabel>
                                     <Typeahead
                                         className="form-control"
                                         id="payer-autocomplete"
@@ -132,7 +179,7 @@ class Calculator extends Component {
                                     />
                             </Form.Row>
                             <Form.Row className="col-6">
-                                <FormLabel>Receiver</FormLabel>
+                                <FormLabel>Seller</FormLabel>
                                 <Typeahead
                                         className="form-control"
                                         id="receiver-autocomplete"
@@ -147,17 +194,42 @@ class Calculator extends Component {
                            
                             <Form.Row className="col-6">
                                 <FormCheck>
-                                    <FormCheck.Input onChange={this.handlePayerVATApplicable} type="checkbox" />
+                                    <FormCheck.Input defaultChecked={this.state.payerVATApplicable} onChange={this.handlePayerVATApplicable} type="checkbox" />
                                     <FormCheck.Label>VAT Applicable</FormCheck.Label>
                                 </FormCheck>
                             </Form.Row>
                             <Form.Row className="col-6">
                                 <FormCheck>
-                                    <FormCheck.Input onChange={this.handleReceiverVATApplicable} type="checkbox" />
+                                    <FormCheck.Input defaultChecked={this.state.receiverVATApplicable} onChange={this.handleReceiverVATApplicable} type="checkbox" />
                                     <FormCheck.Label>VAT Applicable</FormCheck.Label>
                                 </FormCheck>
                             </Form.Row>
                         </Row>
+
+                        <Form.Row className="mb-4">
+                        <h5>Thing</h5>
+                        <ToggleButtonGroup toggle className="col-12" name="transactionType" onChange={this.handleTransactionTypeChange} value={this.state.transactionType}>
+                                <ToggleButton type="radio" value={0}>Goods</ToggleButton>
+                                <ToggleButton type="radio" value={1}>Services</ToggleButton>
+                            </ToggleButtonGroup>
+                        </Form.Row>
+                        <Form.Row className="mb-4">
+
+                            <Typeahead
+                                className="form-control"
+                                id="product-autocomplete"
+                                labelKey="name"
+                                placeholder="No product (standard VAT)"
+                                onChange={this.handleProductChange}
+                                options={this.state.goodsServicesList}
+                            />
+
+                        </Form.Row>
+                        <Form.Row>
+                            <FormLabel>Sum of transaction</FormLabel>
+                            <Form.Control placeholder="Sum" onChange={this.handleSumChange}></Form.Control>
+                        </Form.Row>
+                        
                         <Form.Row className="mb-4">
                             <Button variant="primary" onClick={this.handleClickCalculate}>Calculate</Button>
                         </Form.Row>
@@ -169,13 +241,13 @@ class Calculator extends Component {
                                 <h6>Total amount (including VAT)</h6>
                             </Col>
                             <Col className="col-12 mb-4">
-                                <h4>{this.state.totalAmount}</h4>
+                                <h4>{this.state.totalAmount} €</h4>
                             </Col>
                             <Col className="col-12 mb-2">
                                 <h6>Total amount (ex. VAT)</h6>
                             </Col>
                             <Col className="col-12 mb-4">
-                                <h4>{this.state.totalAmountExVAT}</h4>
+                                <h4>{this.state.totalAmountExVAT} €</h4>
                             </Col>
                             <Row>
                                 <Col className="col-6">
@@ -183,7 +255,7 @@ class Calculator extends Component {
                                         <h6>VAT amount</h6>
                                     </Col>
                                     <Col className="col-12">
-                                        <h4>{this.state.vatAmount}</h4>
+                                        <h4>{this.state.vatAmount} €</h4>
                                     </Col>
                                 </Col>
                                 <Col className="col-6">
@@ -191,7 +263,7 @@ class Calculator extends Component {
                                         <h6>TAX %</h6>
                                     </Col>
                                     <Col className="col-12">
-                                        <h4>{this.state.vatPercentage}</h4>
+                                        <h4>{this.state.vatPercentage} %</h4>
                                     </Col>
                                 </Col>
                             </Row>
