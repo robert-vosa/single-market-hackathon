@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const ValidationService = {
+const VATService = {
     fetchVAT: function() {
-        return axios.get("https://cors-anywhere.herokuapp.com/http://ec.europa.eu/taxation_customs/tedb/api/search/6a352304-b230-4e1d-948d-1337bf68ed2d.json");
+        return axios.get("/data/standard_vat.json");
+    },
+    fetchGoodsAndServices: function() {
+        return axios.get("/data/goods_services.json");
     },
 };
 
-export default ValidationService;
+export default VATService;
