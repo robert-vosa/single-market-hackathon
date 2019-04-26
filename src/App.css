@@ -4,11 +4,49 @@
     margin: auto;
 }
 
+.header{
+    display: flex;
+    height: 70px;
+    background:  #323990;
+    
+}
+
+.logo{
+    margin-left: 40%;
+    justify-content: center;
+    font-size:45px;
+    color: white;
+    width: 30%;
+}
+
+.seacrchBox{
+    float: left;
+}
+
+.cardsHolder{
+    margin-top: 20px;
+}
+
 .center {
     display: flex;
     justify-content: center;
 }
 
-.white_text{
-    color:white;
+
+
+.cardHolder{
+    height: 300px;
 }
+
+.chatHolder{
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    color: white;
+    text-decoration: none;
+    background: #323990;
+    margin-top: 40px;
+}
+

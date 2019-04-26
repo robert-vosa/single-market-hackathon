@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Footer.css";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -20,13 +19,13 @@ const Footer = () => {
                         <h6>Navigation</h6>
                         <ul className="list-unstyled">
                             <li>
-                                <Link  to="/page1">VAT Info</Link>
+                                <Link  to="/info">VAT Info</Link>
                             </li>
                             <li>
-                                <Link  to="/page2">Compare</Link>
+                                <Link  to="/comparing">Compare</Link>
                             </li>
                             <li>
-                                <Link  to="/page3">Calculator</Link>
+                                <Link  to="/calculator">Calculator</Link>
                             </li>
                         </ul>
                     </div>

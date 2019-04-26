@@ -6,46 +6,58 @@ class Cards extends React.Component {
     render () {
         return (
             <React.Fragment>
-                <CardDeck>
-                <Card>
+                <div className="cardsHolder">
+                    <CardDeck>
+                    <Card className="cardHolder">
+                        <Card.Body>
+                        <Card.Title>VAT Info</Card.Title>
+                        <Card.Text>
+                            This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.
+                        </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="center">
+                                <Link  to="/info">Info Tool</Link>
+                        </Card.Footer>
+                    </Card>
+                    <Card className="cardHolder">
+                        <Card.Body>
+                        <Card.Title>VAT Comparing</Card.Title>
+                        <Card.Text>
+                            This card has supporting text below as a natural lead-in to additional
+                            content.{' '}
+                        </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="center">
+                            <Link  to="/comparing">Comparing Tool</Link>
+                        </Card.Footer>
+                    </Card>
+                    <Card className="cardHolder">
+                        <Card.Body>
+                        <Card.Title>VAT Calculator</Card.Title>
+                        <Card.Text>
+                            This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This card has even longer .
+                        </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="center">
+                        <Link  to="/calculator">Calculator Tool</Link>
+                        </Card.Footer>
+                    </Card>
+                    </CardDeck>
+                </div>
+                <hr/>
+                <div className="chatHolder">
+                <Card style={{ width: '18rem' }} className="text-center">
                     <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                    </Card.Text>
+                        <Card.Title>Card Title</Card.Title>
+                        <Card.Text>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the card's content.
+                        </Card.Text>
                     </Card.Body>
-                    <Card.Footer className="center">
-                            <Link  to="/page1">Page1</Link>
-                    </Card.Footer>
-                </Card>
-                <Card >
-                    <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This card has supporting text below as a natural lead-in to additional
-                        content.{' '}
-                    </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="center">
-                        <Link  to="/page2">Page2</Link>
-                    </Card.Footer>
-                </Card>
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to
-                        show that equal height action.
-                    </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="center">
-                     <Link  to="/page3">Page3</Link>
-                    </Card.Footer>
-                </Card>
-                </CardDeck>
+                    </Card>
+                </div>
             </React.Fragment>
         );
     }

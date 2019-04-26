@@ -1,16 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Page1 from './Page1';
+import Info from './info';
 import LandingPage from './landingpage';
-import Page2 from './page2';
-import Page3 from './page3';
+import Comparing from './comparing';
+import Calculator from './calculator';
 
 const Routs = () => (
     <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/page1" component={Page1} />
-        <Route path="/page2" component={Page2} />
-        <Route path="/page3" component={Page3} />
+        <Route path="/info" component={Info} />
+        <Route path="/comparing" component={Comparing} />
+        <Route path="/calculator" component={Calculator} />
     </Switch>
 );
 
