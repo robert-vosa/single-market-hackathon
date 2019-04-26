@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import Main from "./Main";
+import Footer from "./Footer";
 
 class Home extends React.Component {
 
@@ -9,6 +10,7 @@ class Home extends React.Component {
         <React.Fragment>
             <Header />
             <Main />
+            <Footer />
         </React.Fragment>
       );
     }
