@@ -1,0 +1,14 @@
+.App {
+    margin-top: 5em;
+    width: 60%;
+    margin: auto;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.white_text{
+    color:white;
+}
