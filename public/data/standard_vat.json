@@ -1,0 +1,147 @@
+[
+    {
+      "code": "AT",
+      "country": "Austria",
+      "vat": 20
+    },
+    {
+      "code": "BE",
+      "country": "Belgium",
+      "vat": 21
+    },
+    {
+      "code": "BG",
+      "country": "Bulgaria",
+      "vat": 20
+    },
+    {
+      "code": "CY",
+      "country": "Cyprus",
+      "vat": 19
+    },
+    {
+      "code": "CZ",
+      "country": "Czech Republic",
+      "vat": 21
+    },
+    {
+      "code": "DE",
+      "country": "Germany",
+      "vat": 19
+    },
+    {
+      "code": "DK",
+      "country": "Denmark",
+      "vat": 25
+    },
+    {
+      "code": "EE",
+      "country": "Estonia",
+      "vat": 20
+    },
+    {
+      "code": "EL",
+      "country": "Greece",
+      "vat": 24
+    },
+    {
+      "code": "ES",
+      "country": "Spain",
+      "vat": 21
+    },
+    {
+      "code": "FI",
+      "country": "Finland",
+      "vat": 24
+    },
+    {
+      "code": "FR",
+      "country": "France",
+      "vat": 20
+    },
+    {
+      "code": "HR",
+      "country": "Croatia",
+      "vat": 25
+    },
+    {
+      "code": "HU",
+      "country": "Hungary",
+      "vat": 27
+    },
+    {
+      "code": "IE",
+      "country": "Ireland",
+      "vat": 23
+    },
+    {
+      "code": "IT",
+      "country": "Italy",
+      "vat": 22
+    },
+    {
+      "code": "LT",
+      "country": "Lithuania",
+      "vat": 21
+    },
+    {
+      "code": "LU",
+      "country": "Luxembourg",
+      "vat": 17
+    },
+    {
+      "code": "LV",
+      "country": "Latvia",
+      "vat": 21
+    },
+    {
+      "code": "MT",
+      "country": "Malta",
+      "vat": 18
+    },
+    {
+      "code": "NL",
+      "country": "Netherlands",
+      "vat": 21
+    },
+    {
+      "code": "PL",
+      "country": "Poland",
+      "vat": 23
+    },
+    {
+      "code": "PT",
+      "country": "Portugal",
+      "vat": 23
+    },
+    {
+      "code": "RO",
+      "country": "Romania",
+      "vat": 19
+    },
+    {
+      "code": "SE",
+      "country": "Sweden",
+      "vat": 25
+    },
+    {
+      "code": "SI",
+      "country": "Slovenia",
+      "vat": 22
+    },
+    {
+      "code": "SK",
+      "country": "Slovak Republic",
+      "vat": 20
+    },
+    {
+      "code": "UK",
+      "country": "United Kingdom",
+      "vat": 20
+    },
+    {
+      "code": "XX",
+      "country": "non-EU",
+      "vat": ""
+    }
+  ]

@@ -20,3 +20,19 @@ code {
  display: block;
  flex: left;
 }
+
+
+.bg-gray{
+  background: #f8f9fa;
+  padding: 20px 40px;
+}
+
+.border-gray{
+  outline: 1px solid #f8f9fa;
+}
+
+.calculator{
+  outline: 1px solid #f8f9fa;
+  margin-right: -1px;
+  padding: 40px;
+}

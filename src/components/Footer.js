@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer class="footer">
-            <div class="container">
+        <footer className="footer">
+            <div className="container">
                 <div className="row">
                     <div className="col-4">
 
