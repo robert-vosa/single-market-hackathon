@@ -4,15 +4,17 @@ import Info from './info';
 import LandingPage from './landingpage';
 import Comparing from './comparing';
 import Calculator from './calculator';
-import Wizard from './wizard';
+import InfoSearchResult from './infoSearchResult';
+import ComparingResult from './comparingResult';
 
 const Routs = () => (
     <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/info" component={Info} />
         <Route path="/comparing" component={Comparing} />
-        <Route path="/calculator/:prefill?" component={Calculator} />
-        <Route path="/wizard" component={Wizard} />
+        <Route path="/calculator" component={Calculator} />
+        <Route path="/inforesult" component={InfoSearchResult} /> 
+        <Route path="/comparingResult" component={ComparingResult} />
     </Switch>
 );
 
