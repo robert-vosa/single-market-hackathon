@@ -45,7 +45,7 @@ class ComparingResult extends Component {
                         </Table>
                         </div>
                         <div className="map-container">
-                            <img src="/png/eu_map2.png" alt="eu map"  />
+                            <img src="/png/eu_map2.png" alt="EU countries map"  />
                         </div>
                     </div>
                  </div>

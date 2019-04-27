@@ -51,17 +51,17 @@ class Cards extends React.Component {
                     </CardDeck>
                 </div>
                 <h2><span>OR</span></h2>
-                <h4><span>Use the VAT Wizard</span></h4>
-                <div className="chatHolder">
+                <h4 class="center"><span>Use the VAT Wizard</span></h4>
+                <div className="center">
                 <Card style={{ width: '18rem' }} className="text-center">
                     <Card.Body>
                         <Card.Title className="title"><i className="far fa-comments cardIcon" aria-hidden="true"></i>VAT Wizard</Card.Title>
                         <Card.Text>
                         Can't find the right information what you are looking for? Let the VAT Wizard find the correct tool and information for you.
                         </Card.Text>
-                        <Card.Footer className="center">
-                        <Link  to="/wizard">Wizard tool</Link>
-                        </Card.Footer>
+                        <Button variant="secondary">
+                             <Link  style={{ textDecoration: 'none', color: "white"  }} to="/wizard">VAT Wizard Tool</Link>
+                         </Button>
                     </Card.Body>
                     </Card>
                 </div>

@@ -35,6 +35,7 @@ code {
   outline: 1px solid #f8f9fa;
   margin-right: -1px;
   padding: 40px;
+  background-color: white;
 }
 
 .chat-left{

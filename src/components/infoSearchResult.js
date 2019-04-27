@@ -19,7 +19,7 @@ class InfoSearchResult extends Component {
                     </div>
                         
                     
-                         <img src="/png/infoPage.png" alt="Smiley face"  width="700"/>
+                         <img src="/png/infoPage.png" class="responsive" alt="EU countries map" />
                          <div className="align-end">
                              <Link to="/info" ><Button className="back-to-search" variant="outline-primary">More info</Button></Link>
                          </div>

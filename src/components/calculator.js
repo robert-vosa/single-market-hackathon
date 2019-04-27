@@ -224,10 +224,12 @@ class Calculator extends Component {
         return (
             <React.Fragment>
             <Breadcrumb  label>
-                 <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                 <Breadcrumb.Item className="breadCrumbs" href="/">Home</Breadcrumb.Item>
                  <Breadcrumb.Item active>Calculator</Breadcrumb.Item>
              </Breadcrumb>
-             <div className="header-container"><h1>VAT Calculator</h1></div>
+             <div className="header-container">
+                <h1>VAT Calculator</h1>
+            </div>
             
             <div className="container">
                 <Row>
@@ -266,7 +268,7 @@ class Calculator extends Component {
                            
                             <Form.Row className="col-6">
                                 <FormCheck>
-                                    <FormCheck.Input defaultChecked={this.state.payerVATApplicable} onChange={this.handlePayerVATApplicable} type="checkbox" />
+                                    <FormCheck.Input defaultChecked={this.state.payerVATApplicable}  type="checkbox" />
                                     <FormCheck.Label>VAT Applicable</FormCheck.Label>
                                 </FormCheck>
                             </Form.Row>
@@ -280,9 +282,9 @@ class Calculator extends Component {
 
                         <Form.Row className="mb-4">
                         <h5>Thing</h5>
-                        <ToggleButtonGroup toggle className="col-12" name="transactionType" onChange={this.handleTransactionTypeChange} value={this.state.transactionType}>
-                                <ToggleButton size="lg" type="radio" value={0}>Goods</ToggleButton>
-                                <ToggleButton size="lg" type="radio" value={1}>Services</ToggleButton>
+                        <ToggleButtonGroup toggle className="col-12 radioButtons" name="transactionType" onChange={this.handleTransactionTypeChange} value={this.state.transactionType}>
+                                <ToggleButton  className="radioButton calculator-radio-button" size="lg" type="radio" value={0}>Goods</ToggleButton>
+                                <ToggleButton  className="radioButton calculator-radio-button" size="lg" type="radio" value={1}>Services</ToggleButton>
                             </ToggleButtonGroup>
                         </Form.Row>
                         <Form.Row className="mb-4">
@@ -303,7 +305,7 @@ class Calculator extends Component {
                         </Form.Row>
                         
                         <Form.Row className="mb-4">
-                            <Button variant="success" size="lg" onClick={this.handleClickCalculate}>Calculate</Button>
+                            <Button variant="primary" size="lg" onClick={this.handleClickCalculate}>Calculate</Button>
                         </Form.Row>
                     </Form>
                     </div>

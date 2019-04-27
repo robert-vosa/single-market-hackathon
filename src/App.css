@@ -1,23 +1,26 @@
 .App, .infoHome-container, .flags-container {
-    margin-top: 5em;
+    margin-top: 10em;
     width: 60%;
     margin: auto;
+    background-color: white;
+    padding: 10px; 
 }
+
 
 .header{
     display: flex;
     height: 70px;
     background:  #00549d;
+    justify-content: space-between;
+    padding-right: 30px;
+    padding-left: 30px;
     
 }
 
 .logo{
-    font-family: 'Libre Baskerville', serif;
-    margin-left: 40%;
-    justify-content: center;
+    font-family: 'Raleway', sans-serif;
     font-size:45px;
     color: white;
-    width: 30%;
 }
 
 .seacrchBox{
@@ -56,13 +59,14 @@
 
 .footer {
     padding-top: 30px;
-    height: 100px;
+    height: 100%;
     display: flex;
     justify-content: space-around;
     color: white;
     text-decoration: none;
     background: #00549d;
     margin-top: 40px;
+    height: 500px;
 }
 
 .footerLink {
@@ -200,6 +204,45 @@ h2 {
  } 
  
  h2 span { 
-     background:#fff; 
+     background: white; 
      padding:0 10px; 
  }
+
+  .responsive {
+        width: 100%;
+        height: auto;
+}
+
+.radioButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.radioButton {
+    background: #B2CBE1;
+    color: #00213e;
+    border: 1px solid grey;
+}
+
+.calculator-radio-button:hover {
+    background: #1965a6;
+    color: white;
+}
+
+.breadCrumbs {
+    margin-left: 21%;
+    opacity: 0.6;
+}
+
+.border-gray h6 {
+    color: #00437d;
+}
+
+body {
+    background-image: url('https://d2i72ju5buk5xz.cloudfront.net/gsc/VNRM7Y/e3/76/d8/e376d8b9d4b144e7b6d0369f62b822e1/images/home/u0.jpg?token=7bf7c687411809424ba126c9195dcc133f24f2953cf9cb01d834e1d151d17857');
+    background-size: 100%; 
+}
+
+h1 {
+    color: white;
+}
