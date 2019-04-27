@@ -76,7 +76,7 @@
     padding-right: 10px;
 }
 
-.info-home-page {
+.info-home-page , .info-result-page-header{
     display: flex;
     justify-content: center;
 }
@@ -122,4 +122,22 @@
     justify-content: center;
     padding-bottom: 20px;
     color: #00549d;
+}
+
+.info-result-page-containers {
+    width: 60%;
+    margin: auto;
+}
+
+.info-result-page-header {
+    padding-bottom: 10px;
+}
+
+.back-to-search{
+    margin-bottom: 20px;
+} 
+
+.result-page-more-buttom{
+    display: flex;
+    justify-content: flex-end;
 }

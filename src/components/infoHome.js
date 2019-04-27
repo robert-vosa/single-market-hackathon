@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class InfoHome extends Component {
     render() {
@@ -16,7 +17,7 @@ class InfoHome extends Component {
                     </div>
                     <div className="search_by_flag-container">
                         <div className="search_by_flag_col1">
-                             <button type="submit"><img src="/png/Austria.png" alt="Austria"/>Austria</button>
+                            <button type="submit"><img src="/png/Austria.png" alt="Austria"/>Austria</button>
                             <button type="submit"><img src="/png/Belgium.png" alt="Belgium"/>Belgium</button>
                             <button type="submit"><img src="/png/Bulgaria.png" alt="Bulgaria"/>Bulgaria</button>
                             <button type="submit"><img src="/png/Croatia.png" alt="Croatia"/>Croatia</button>
@@ -28,7 +29,7 @@ class InfoHome extends Component {
                             <button type="submit"><img src="/png/France.png" alt="France"/>France</button>
                         </div>
                         <div className="search_by_flag_col2">
-                            <button type="submit"><img src="/png/Germany.png" alt="Germany"/>Germany</button>
+                        <Link to="/inforesult"><button type="submit"><img src="/png/Germany.png" alt="Germany"/>Germany</button></Link>
                             <button type="submit"><img src="/png/Greece.png" alt="Greece"/>Greece</button>
                             <button type="submit"><img src="/png/Hungary.png" alt="Hungary"/>Hungary</button>
                             <button type="submit"><img src="/png/Ireland.png" alt="Ireland"/>Ireland</button>
