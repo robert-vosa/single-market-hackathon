@@ -11,7 +11,7 @@ class Cards extends React.Component {
                     <CardDeck>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i className="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
+                        <Card.Title className="title"><i className="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
                         <Card.Text>
                              Here you can find all the relevant VAT information of a member state.
                         </Card.Text>
@@ -24,7 +24,7 @@ class Cards extends React.Component {
                     </Card>
                     <Card className="center">
                         <Card.Body>
-                        <Card.Title><i className="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
+                        <Card.Title className="title"><i className="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
                         <Card.Text>
                             This tool enables you to calculate the specific cost for your transaction based on the product or service.
                         </Card.Text>
@@ -37,9 +37,9 @@ class Cards extends React.Component {
                     </Card>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i className="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
+                        <Card.Title className="title"><i className="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
                         <Card.Text>
-                            Not sure which member state has the most diverse VAT rules? Select this tool to compare different countries side-by-side and find out the most suitable.{' '}
+                            Select this tool to compare different countries side-by-side and find out the most suitable.{' '}
                         </Card.Text>
                         </Card.Body>
                         <Card.Footer className="center">

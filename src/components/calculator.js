@@ -231,7 +231,7 @@ class Calculator extends Component {
                 <h1>VAT Calculator</h1>
             </div>
             
-            <div className="container">
+            <div className="container juurde">
                 <Row>
                     <div className="col-8 calculator" >
                     <Form>

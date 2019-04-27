@@ -25,7 +25,7 @@ class Wizard extends Component {
         this.setState({ message: "" });
         this.setState({chat: this.state.chat});
         setTimeout(() => {
-            this.state.chat.push({ message: "OK. Try the ", source: "cpu" , link: "/calculator/true", linkName: "Calculator"  });
+            this.state.chat.push({ message: "Hmm... Why don't you try the ", source: "cpu" , link: "/calculator/true", linkName: "Calculator"  });
             this.setState({chat: this.state.chat});
         }, 1000);
     }
@@ -39,7 +39,7 @@ class Wizard extends Component {
                      <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                      <Breadcrumb.Item active>Wizard</Breadcrumb.Item>
                  </Breadcrumb>
-                 <div className="container">
+                 <div className="container wizard-container">
                     <Row>
                         {this.state.chat.map(c => {
                             idx++;

@@ -94,6 +94,7 @@
 
 .infoHome-container, .flags-container{
     width: 500px;
+    padding: 20px;
 }
 
 .search_by_flag-container{
@@ -172,10 +173,17 @@
     justify-content: flex-end;
 }
 
+.wizard-container{
+    background-color: white;
+    padding: 20px;
+}
+
 
 .result-container{
     width: 70%;
     margin: auto;
+    background-color: white;
+    padding: 20px;
 }
 
 .info-result-container, .container{
@@ -229,9 +237,18 @@ h2 {
     color: white;
 }
 
+.calculator-radio-button:focus {
+    border: 0 !important; 
+}
+
 .breadCrumbs {
     margin-left: 21%;
     opacity: 0.6;
+}
+
+.breadcrumb{
+    border-radius: 0;
+    background-color: white;
 }
 
 .border-gray h6 {

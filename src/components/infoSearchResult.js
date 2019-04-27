@@ -13,16 +13,19 @@ class InfoSearchResult extends Component {
                 <div className="info-result-container">
                     <div className="header-container">
                          <h1>Vat information: Germany</h1>
+                        
                     </div>
+                    <div className="wizard-container juurde">
+
                     <div className="alignLeft">
                          <Link to="/info" ><Button className="back-to-search" variant="outline-primary">Back to search</Button></Link>
                     </div>
-                        
+                    <img src="/png/infoPage.png" class="responsive" alt="EU countries map" />
+                    <div className="align-end">
+                        <Link to="/info" ><Button className="back-to-search" variant="outline-primary">More info</Button></Link>
+                    </div>
+                    </div>
                     
-                         <img src="/png/infoPage.png" class="responsive" alt="EU countries map" />
-                         <div className="align-end">
-                             <Link to="/info" ><Button className="back-to-search" variant="outline-primary">More info</Button></Link>
-                         </div>
                  </div>
             </React.Fragment>
         );
