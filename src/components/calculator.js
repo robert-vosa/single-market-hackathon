@@ -30,7 +30,7 @@ class Calculator extends Component {
           totalAmountExVAT: 0,
           vatAmount: 0,
           vatPercentage: 0,
-          countries: [ { "name": "Estonia", "value": "EE"}, { "name": "Belgium", "value": "BE"} ],
+          countries: [],
           standardVATs: [],
           goodsServicesList: [],
           product: []
@@ -39,7 +39,6 @@ class Calculator extends Component {
         VATService.fetchVAT().then(res => {
             this.state.standardVATs = res.data;
             var countries = res.data.map(c => { return { name: c.country, value: c.code } })
-            console.log(countries)
             this.setState({countries: countries})
         });
 

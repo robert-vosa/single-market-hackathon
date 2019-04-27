@@ -4,6 +4,7 @@ import Info from './info';
 import LandingPage from './landingpage';
 import Comparing from './comparing';
 import Calculator from './calculator';
+import Wizard from './wizard';
 
 const Routs = () => (
     <Switch>
@@ -11,6 +12,7 @@ const Routs = () => (
         <Route path="/info" component={Info} />
         <Route path="/comparing" component={Comparing} />
         <Route path="/calculator" component={Calculator} />
+        <Route path="/wizard" component={Wizard} />
     </Switch>
 );
 

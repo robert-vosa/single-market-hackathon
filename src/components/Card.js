@@ -10,7 +10,7 @@ class Cards extends React.Component {
                     <CardDeck>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i class="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
+                        <Card.Title><i className="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
                         <Card.Text>
                             This is a wider card with supporting text below as a natural lead-in to
                             additional content. This content is a little bit longer.
@@ -22,7 +22,7 @@ class Cards extends React.Component {
                     </Card>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i class="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
+                        <Card.Title><i className="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
                         <Card.Text>
                             This card has supporting text below as a natural lead-in to additional
                             content.{' '}
@@ -34,7 +34,7 @@ class Cards extends React.Component {
                     </Card>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i class="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
+                        <Card.Title><i className="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
                         <Card.Text>
                             This is a wider card with supporting text below as a natural lead-in to
                             additional content. This card has even longer .
@@ -50,11 +50,14 @@ class Cards extends React.Component {
                 <div className="chatHolder">
                 <Card style={{ width: '18rem' }} className="text-center">
                     <Card.Body>
-                        <Card.Title><i class="far fa-comments cardIcon" aria-hidden="true"></i>Card Title</Card.Title>
+                        <Card.Title><i className="far fa-comments cardIcon" aria-hidden="true"></i>Card Title</Card.Title>
                         <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.
                         </Card.Text>
+                        <Card.Footer className="center">
+                        <Link  to="/wizard">Wizard tool</Link>
+                        </Card.Footer>
                     </Card.Body>
                     </Card>
                 </div>

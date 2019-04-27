@@ -36,3 +36,20 @@ code {
   margin-right: -1px;
   padding: 40px;
 }
+
+.chat-left{
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.chat-right{
+  background: burlywood;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  float: right;
+}
