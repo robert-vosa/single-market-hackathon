@@ -10,14 +10,17 @@ class InfoSearchResult extends Component {
                      <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                      <Breadcrumb.Item active>Info</Breadcrumb.Item>
                  </Breadcrumb>
-                <div className="info-result-page-containers">
-                    <div className="info-result-page-header">
+                <div className="info-result-container">
+                    <div className="header-container">
                          <h1>Vat information: Germany</h1>
                     </div>
-                        <Link to="/info" ><Button className="back-to-search" variant="outline-primary">Back to search</Button></Link>
+                    <div className="alignLeft">
+                         <Link to="/info" ><Button className="back-to-search" variant="outline-primary">Back to search</Button></Link>
+                    </div>
+                        
                     
                          <img src="/png/infoPage.png" alt="Smiley face"  width="700"/>
-                         <div className="result-page-more-buttom">
+                         <div className="align-end">
                              <Link to="/info" ><Button className="back-to-search" variant="outline-primary">More info</Button></Link>
                          </div>
                  </div>

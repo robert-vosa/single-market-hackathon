@@ -157,10 +157,11 @@ class Calculator extends Component {
     render() {
         return (
             <React.Fragment>
-            <Breadcrumb label>
+            <Breadcrumb  label>
                  <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                  <Breadcrumb.Item active>Calculator</Breadcrumb.Item>
              </Breadcrumb>
+             <div className="header-container"><h1>VAT Calculator</h1></div>
             
             <div className="container">
                 <Row>

@@ -7,53 +7,57 @@ class Cards extends React.Component {
         return (
             <React.Fragment>
                 <div className="cardsHolder">
+                <h2><span>Select Your Tool</span></h2>
                     <CardDeck>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i class="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
+                        <Card.Title className="title"><i class="fas fa-info cardIcon" aria-hidden="true"></i>VAT Info</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.
+                             Here you can find all the relevant VAT information of a member state.
                         </Card.Text>
                         </Card.Body>
                         <Card.Footer className="center">
-                                <Link  to="/info">Info Tool</Link>
+                            <Button className="pr-button" variant="secondary">
+                                <Link  style={{ textDecoration: 'none', color: "white" }} to="/info">Info Tool</Link>
+                            </Button>      
+                        </Card.Footer>
+                    </Card>
+                    <Card className="center">
+                        <Card.Body>
+                        <Card.Title className="title"><i class="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
+                        <Card.Text>
+                            This tool enables you to calculate the specific cost for your transaction based on the product or service.
+                        </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="center">
+                            <Button variant="secondary">
+                                <Link  style={{ textDecoration: 'none', color: "white"  }} to="/calculator">Calculator Tool</Link>
+                            </Button>
                         </Card.Footer>
                     </Card>
                     <Card className="cardHolder">
                         <Card.Body>
-                        <Card.Title><i class="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
+                        <Card.Title className="title"><i class="far fa-clone cardIcon" aria-hidden="true"></i>VAT Comparing</Card.Title>
                         <Card.Text>
-                            This card has supporting text below as a natural lead-in to additional
-                            content.{' '}
+                            Not sure which member state has the most diverse VAT rules? Select this tool to compare different countries side-by-side and find out the most suitable.{' '}
                         </Card.Text>
                         </Card.Body>
                         <Card.Footer className="center">
-                            <Link  to="/comparing">Comparing Tool</Link>
-                        </Card.Footer>
-                    </Card>
-                    <Card className="cardHolder">
-                        <Card.Body>
-                        <Card.Title><i class="fas fa-calculator cardIcon" aria-hidden="true"></i>VAT Calculator</Card.Title>
-                        <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer .
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Footer className="center">
-                        <Link  to="/calculator">Calculator Tool</Link>
+                         <Button variant="secondary">
+                             <Link  style={{ textDecoration: 'none', color: "white"  }} to="/comparing">Comparing Tool</Link>
+                         </Button>  
                         </Card.Footer>
                     </Card>
                     </CardDeck>
                 </div>
-                <hr/>
+                <h2><span>OR</span></h2>
+                <h4><span>Use the VAT Wizard</span></h4>
                 <div className="chatHolder">
                 <Card style={{ width: '18rem' }} className="text-center">
                     <Card.Body>
-                        <Card.Title><i class="far fa-comments cardIcon" aria-hidden="true"></i>Card Title</Card.Title>
+                        <Card.Title className="title"><i class="far fa-comments cardIcon" aria-hidden="true"></i>VAT Wizard</Card.Title>
                         <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
+                        Can't find the right information what you are looking for? Let the VAT Wizard find the correct tool and information for you.
                         </Card.Text>
                     </Card.Body>
                     </Card>
