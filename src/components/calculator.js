@@ -1,7 +1,6 @@
 import React, { Component, Control, FormGroup } from 'react';
 import { Breadcrumb, Form, Row, Col, Button, ButtonGroup, ToggleButton, FormLabel, FormCheck, ToggleButtonGroup } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
 import VATService from "../services/VATService";
 
 class Calculator extends Component {
@@ -31,7 +30,7 @@ class Calculator extends Component {
           totalAmountExVAT: 0,
           vatAmount: 0,
           vatPercentage: 0,
-          options: [ { "name": "Estonia", "value": "EE"}, { "name": "Belgium", "value": "BE"} ],
+          countries: [ { "name": "Estonia", "value": "EE"}, { "name": "Belgium", "value": "BE"} ],
           standardVATs: [],
           goodsServicesList: [],
           product: []
@@ -39,6 +38,9 @@ class Calculator extends Component {
 
         VATService.fetchVAT().then(res => {
             this.state.standardVATs = res.data;
+            var countries = res.data.map(c => { return { name: c.country, value: c.code } })
+            console.log(countries)
+            this.setState({countries: countries})
         });
 
         VATService.fetchGoodsAndServices().then(res => {
@@ -175,7 +177,7 @@ class Calculator extends Component {
                                         labelKey="name"
                                         placeholder="Choose a country..."
                                         onChange={this.handlePayerChange}
-                                        options={this.state.options}
+                                        options={this.state.countries}
                                     />
                             </Form.Row>
                             <Form.Row className="col-6">
@@ -186,7 +188,7 @@ class Calculator extends Component {
                                         labelKey="name"
                                         placeholder="Choose a country..."
                                         onChange={this.handleReceiverChange}
-                                        options={this.state.options}
+                                        options={this.state.countries}
                                     />
                             </Form.Row>
                         </Row>
@@ -209,8 +211,8 @@ class Calculator extends Component {
                         <Form.Row className="mb-4">
                         <h5>Thing</h5>
                         <ToggleButtonGroup toggle className="col-12" name="transactionType" onChange={this.handleTransactionTypeChange} value={this.state.transactionType}>
-                                <ToggleButton type="radio" value={0}>Goods</ToggleButton>
-                                <ToggleButton type="radio" value={1}>Services</ToggleButton>
+                                <ToggleButton size="lg" type="radio" value={0}>Goods</ToggleButton>
+                                <ToggleButton size="lg" type="radio" value={1}>Services</ToggleButton>
                             </ToggleButtonGroup>
                         </Form.Row>
                         <Form.Row className="mb-4">
@@ -225,13 +227,13 @@ class Calculator extends Component {
                             />
 
                         </Form.Row>
-                        <Form.Row>
+                        <Form.Row className="mb-4">
                             <FormLabel>Sum of transaction</FormLabel>
-                            <Form.Control placeholder="Sum" onChange={this.handleSumChange}></Form.Control>
+                            <Form.Control placeholder="Enter the the value of the transaction" onChange={this.handleSumChange}></Form.Control>
                         </Form.Row>
                         
                         <Form.Row className="mb-4">
-                            <Button variant="primary" onClick={this.handleClickCalculate}>Calculate</Button>
+                            <Button variant="success" size="lg" onClick={this.handleClickCalculate}>Calculate</Button>
                         </Form.Row>
                     </Form>
                     </div>

@@ -141,3 +141,24 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.rbt.form-control{
+    padding: none;
+}
+
+.rbt.form-control > div:first-of-type{
+    top: -7px;
+    left: -13px;
+
+}
+
+.rbt.form-control >.rbt-menu.dropdown-menu{
+    top: 15px !important;
+}
+
+.rbt-input-main.form-control.rbt-input{
+    border-right: none;
+    outline: none !important;
+    box-shadow: none;
+    border-color: #ced4da;
+}
