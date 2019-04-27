@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Form, Row, Col, Button, ButtonGroup, ToggleButton, FormLabel, FormCheck, ToggleButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class Wizard extends Component {
 
@@ -24,7 +25,7 @@ class Wizard extends Component {
         this.setState({ message: "" });
         this.setState({chat: this.state.chat});
         setTimeout(() => {
-            this.state.chat.push({ message: "OK. Try the <a href='/calculator/true'>Calculator</a>", source: "cpu"  });
+            this.state.chat.push({ message: "OK. Try the ", source: "cpu" , link: "/calculator/true", linkName: "Calculator"  });
             this.setState({chat: this.state.chat});
         }, 1000);
     }
@@ -42,7 +43,9 @@ class Wizard extends Component {
                     <Row>
                         {this.state.chat.map(c => {
                             idx++;
-                            return (<Col key={idx} className="col-12 mb-4"><div className={c.source == 'cpu' ? 'chat-left' : 'chat-right'} dangerouslySetInnerHTML={{__html: c.message}}></div></Col>);
+                            return (<Col key={idx} className="col-12 mb-4"><div className={c.source == 'cpu' ? 'chat-left' : 'chat-right'}>
+                            {c.message} {c.link == null ? '': <Link to={c.link}>{c.linkName}</Link>}
+                            </div></Col>);
                         })}
                     </Row>
                     <Row className="mt-4">
