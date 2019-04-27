@@ -7,15 +7,9 @@ class Calculator extends Component {
 
     goodsAndServices = [];
 
-    componentDidMount () {
-        const { prefill } = this.props.match.params;
-        if(prefill == "true"){
-            this.state.payer = [{ value: "AT", name: "Austria"}];
-        }
-    }
-
     constructor(props, context) {
         super(props, context);
+
     
         this.handleTransactionTypeChange = this.handleTransactionTypeChange.bind(this);
         this.handlePayerChange = this.handlePayerChange.bind(this);
@@ -46,14 +40,20 @@ class Calculator extends Component {
         VATService.fetchVAT().then(res => {
             this.state.standardVATs = res.data;
             var countries = res.data.map(c => { return { name: c.country, value: c.code } })
-            this.setState({countries: countries})
+            this.setState({countries: countries});
+
+            if(props.match.params.prefill == "true"){
+                this.setState({payer: [{ value: "AT", name: "Austria"}]})
+            }
+
         });
 
         VATService.fetchGoodsAndServices().then(res => {
             this.goodsAndServices = res.data;
             var list = this.goodsAndServices.map(g => { return {  "name": g.Name, "value": g }});
-            this.setState({ goodsServicesList: list })
+            this.setState({ goodsServicesList: list });
         });
+        
       }
 
     handleProductChange(product, event) {

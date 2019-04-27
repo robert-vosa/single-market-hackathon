@@ -31,7 +31,7 @@ class Cards extends React.Component {
                         </Card.Body>
                         <Card.Footer className="center">
                             <Button variant="secondary">
-                                <Link  style={{ textDecoration: 'none', color: "white"  }} to="/calculator">Calculator Tool</Link>
+                                <Link  style={{ textDecoration: 'none', color: "white"  }} to="/comparing">Comparing Tool</Link>
                             </Button>
                         </Card.Footer>
                     </Card>
@@ -44,7 +44,7 @@ class Cards extends React.Component {
                         </Card.Body>
                         <Card.Footer className="center">
                          <Button variant="secondary">
-                             <Link  style={{ textDecoration: 'none', color: "white"  }} to="/comparing">Comparing Tool</Link>
+                             <Link  style={{ textDecoration: 'none', color: "white"  }} to="/calculator">Calculator Tool</Link>
                          </Button>  
                         </Card.Footer>
                     </Card>
@@ -55,7 +55,7 @@ class Cards extends React.Component {
                 <div className="chatHolder">
                 <Card style={{ width: '18rem' }} className="text-center">
                     <Card.Body>
-                        <Card.Title className="title"><i class="far fa-comments cardIcon" aria-hidden="true"></i>VAT Wizard</Card.Title>
+                        <Card.Title className="title"><i className="far fa-comments cardIcon" aria-hidden="true"></i>VAT Wizard</Card.Title>
                         <Card.Text>
                         Can't find the right information what you are looking for? Let the VAT Wizard find the correct tool and information for you.
                         </Card.Text>

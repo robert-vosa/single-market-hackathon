@@ -13,10 +13,10 @@ const Routs = () => (
         <Route exact path="/" component={LandingPage} />
         <Route path="/info" component={Info} />
         <Route path="/comparing" component={Comparing} />
-        <Route path="/calculator" component={Calculator} />
+        <Route path="/calculator/:prefill?" component={Calculator} />
         <Route path="/inforesult" component={InfoSearchResult} /> 
         <Route path="/comparingResult" component={ComparingResult} />
-        <Route path="/wizard/:prefill?" component={Wizard} />
+        <Route path="/wizard" component={Wizard} />
     </Switch>
 );
 
