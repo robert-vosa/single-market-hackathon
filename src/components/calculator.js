@@ -20,31 +20,50 @@ class Calculator extends Component {
         this.handleSumChange = this.handleSumChange.bind(this);
         this.handleProductChange = this.handleProductChange.bind(this);
 
-        this.state = {
-          transactionType: null,
-          payer: [],
-          receiver: [],
-          payerVATApplicable: false,
-          receiverVATApplicable: false,
-          sum: 0,
-          totalAmount: 0,
-          totalAmountExVAT: 0,
-          vatAmount: 0,
-          vatPercentage: 0,
-          countries: [],
-          standardVATs: [],
-          goodsServicesList: [],
-          product: []
-        };
+
+        if(props.match.params.prefill == "true"){
+            this.state = {
+                transactionType: 0,
+                payer: [{name: "Germany", value: "DE"}],
+                receiver: [{name: "Germany", value: "DE"}],
+                payerVATApplicable: true,
+                receiverVATApplicable: true,
+                sum: 100000,
+                totalAmount: 0,
+                totalAmountExVAT: 0,
+                vatAmount: 0,
+                vatPercentage: 0,
+                countries: [],
+                standardVATs: [],
+                goodsServicesList: [],
+                product: []
+              };
+
+
+
+        }else{
+            this.state = {
+                transactionType: null,
+                payer: [],
+                receiver: [],
+                payerVATApplicable: false,
+                receiverVATApplicable: false,
+                sum: 0,
+                totalAmount: 0,
+                totalAmountExVAT: 0,
+                vatAmount: 0,
+                vatPercentage: 0,
+                countries: [],
+                standardVATs: [],
+                goodsServicesList: [],
+                product: []
+              };
+        }
 
         VATService.fetchVAT().then(res => {
             this.state.standardVATs = res.data;
             var countries = res.data.map(c => { return { name: c.country, value: c.code } })
             this.setState({countries: countries});
-
-            if(props.match.params.prefill == "true"){
-                this.setState({payer: [{ value: "AT", name: "Austria"}]})
-            }
 
         });
 
@@ -55,6 +74,7 @@ class Calculator extends Component {
         });
         
       }
+
 
     handleProductChange(product, event) {
         this.setState({ product });
@@ -73,7 +93,6 @@ class Calculator extends Component {
 
     handlePayerChange(payer, event) {
         this.setState({ payer });
-        console.log(payer)
     }
 
     handleReceiverChange(receiver, event) {
@@ -99,6 +118,8 @@ class Calculator extends Component {
         var receiverCountry = this.state.receiver[0].value;
 
         var effectiveVAT = 0;
+        var toDeclare = 0;
+        var deductableAmount = 0;
 
         if(!this.state.receiverVATApplicable){
             //Kui müüja ei ole kohuslane on alati exempt
@@ -116,7 +137,6 @@ class Calculator extends Component {
                     }else{
 
                         effectiveVAT = this.findVAT(receiverCountry);
-                       console.log(effectiveVAT)
                         if(effectiveVAT != -1) 
                             effectiveVAT = 0; 
                     }
@@ -124,11 +144,50 @@ class Calculator extends Component {
             }
         }
 
+        
+
+
         var calcVat = effectiveVAT;
 
         if(effectiveVAT < 0){
             calcVat = 0;
         }
+
+
+        if(!this.state.payerVATApplicable){
+            toDeclare = -1;
+            deductableAmount = -1;
+        }else{
+
+            if(payerCountry == receiverCountry){
+                if(this.state.payerVATApplicable){
+                    deductableAmount = this.state.sum * (calcVat / 100);
+                    toDeclare = -1;
+                }else{
+                    toDeclare = -1;
+                    deductableAmount = -1;
+                }
+            }else{
+
+                if(this.state.transactionType == 0){
+                    if(this.state.receiverVATApplicable){
+                        var vat = this.findVAT(payerCountry);
+                        toDeclare = this.state.sum * (vat / 100);
+                        deductableAmount = this.state.sum * (vat / 100);
+                    }
+                }
+    
+                if(this.state.transactionType == 1){
+                    if(this.state.receiverVATApplicable){
+                        var vat = this.findVAT(payerCountry);
+                        deductableAmount = this.state.sum * (vat / 100);
+                        toDeclare = -1;
+                    }
+                }
+            }
+        }
+
+
 
 
         var totalAmount = this.state.sum * (1 + calcVat / 100);
@@ -138,6 +197,8 @@ class Calculator extends Component {
         this.setState({ totalAmount: totalAmount.toFixed(2) });
         this.setState({ vatAmount: vatAmount.toFixed(2) });
         this.setState({ totalAmountExVAT: (+this.state.sum).toFixed(2) });
+        this.setState({ toDeclare: toDeclare < 0 ? '-' : toDeclare.toFixed(2) });
+        this.setState({ deductableAmount: deductableAmount < 0 ? '-' : deductableAmount.toFixed(2) });
     }
 
     findVAT(code){
@@ -181,9 +242,10 @@ class Calculator extends Component {
                                         className="form-control"
                                         id="payer-autocomplete"
                                         labelKey="name"
+                                        ref="buyer"
                                         placeholder="Choose a country..."
                                         onChange={this.handlePayerChange}
-                                        value={this.state.payer}
+                                        defaultInputValue={this.state.payer.length > 0 ? this.state.payer[0].name : ''}
                                         options={this.state.countries}
                                     />
                             </Form.Row>
@@ -195,6 +257,7 @@ class Calculator extends Component {
                                         labelKey="name"
                                         placeholder="Choose a country..."
                                         onChange={this.handleReceiverChange}
+                                        defaultInputValue={this.state.receiver.length > 0 ? this.state.receiver[0].name : ''}
                                         options={this.state.countries}
                                     />
                             </Form.Row>
@@ -236,7 +299,7 @@ class Calculator extends Component {
                         </Form.Row>
                         <Form.Row className="mb-4">
                             <FormLabel>Sum of transaction</FormLabel>
-                            <Form.Control placeholder="Enter the the value of the transaction" onChange={this.handleSumChange}></Form.Control>
+                            <Form.Control placeholder="Enter the the value of the transaction" value={this.state.sum} onChange={this.handleSumChange}></Form.Control>
                         </Form.Row>
                         
                         <Form.Row className="mb-4">
@@ -246,7 +309,10 @@ class Calculator extends Component {
                     </div>
                     <div className="col-4 bg-gray border-gray">
                         <Row>
-                            <Col className="col-12 mt-4 mb-2">
+                        <Col className="col-12 mt-4">
+                                <h5>Seller information</h5>
+                            </Col>
+                            <Col className="col-12  mb-2">
                                 <h6>Total amount (including VAT)</h6>
                             </Col>
                             <Col className="col-12 mb-4">
@@ -258,24 +324,51 @@ class Calculator extends Component {
                             <Col className="col-12 mb-4">
                                 <h4>{this.state.totalAmountExVAT} €</h4>
                             </Col>
-                            <Row>
-                                <Col className="col-6">
-                                    <Col className="col-12">
-                                        <h6>VAT amount</h6>
+                            <Col className="p-0 col-12">
+                                <Row>
+                                    <Col className="col-6">
+                                        <Col className="col-12">
+                                            <h6>VAT amount</h6>
+                                        </Col>
+                                        <Col className="col-12">
+                                            <h4>{this.state.vatAmount} €</h4>
+                                        </Col>
                                     </Col>
-                                    <Col className="col-12">
-                                        <h4>{this.state.vatAmount} €</h4>
+                                    <Col className="col-6">
+                                        <Col className="col-12">
+                                            <h6>TAX %</h6>
+                                        </Col>
+                                        <Col className="col-12">
+                                            <h4>{this.state.vatPercentage} %</h4>
+                                        </Col>
                                     </Col>
-                                </Col>
-                                <Col className="col-6">
-                                    <Col className="col-12">
-                                        <h6>TAX %</h6>
-                                    </Col>
-                                    <Col className="col-12">
-                                        <h4>{this.state.vatPercentage} %</h4>
-                                    </Col>
-                                </Col>
-                            </Row>
+                                </Row>
+                            </Col >
+                            <Col className="p-0 col-12">
+                                <hr />
+                            </Col>
+                            <Col className="col-12">
+                                <h5>Additional info for buyer</h5>
+                            </Col>
+                            <Col className="col-12 mb-2">
+                                <h6>Payable amount</h6>
+                            </Col>
+                            <Col className="col-12 mb-4">
+                                <h4>{this.state.totalAmount} €</h4>
+                            </Col>
+                            <Col className="col-12 mb-2">
+                                <h6>Additional VAT to declare</h6>
+                            </Col>
+                            <Col className="col-12 mb-4">
+                                <h4>{this.state.toDeclare} €</h4>
+                            </Col>
+                            <Col className="col-12 mb-2">
+                                <h6>Deductable amount</h6>
+                            </Col>
+                            <Col className="col-12 mb-4">
+                                <h4>{this.state.deductableAmount} €</h4>
+                            </Col>
+                            
                            
                         </Row>
                     </div>
