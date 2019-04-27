@@ -22,12 +22,16 @@ class Wizard extends Component {
     handleAddMessage(event) {
         this.state.chat.push({ message: this.state.message, source: "user" });
         this.setState({ message: "" });
-
         this.setState({chat: this.state.chat});
+        setTimeout(() => {
+            this.state.chat.push({ message: "OK. Try the <a href='/calculator/true'>Calculator</a>", source: "cpu"  });
+            this.setState({chat: this.state.chat});
+        }, 1000);
     }
 
 
     render() {
+        var idx = 0;
         return (
             <React.Fragment>
                 <Breadcrumb label>
@@ -37,7 +41,8 @@ class Wizard extends Component {
                  <div className="container">
                     <Row>
                         {this.state.chat.map(c => {
-                            return (<Col key={0} className="col-12 mb-4"><div className={c.source == 'cpu' ? 'chat-left' : 'chat-right'}>{c.message}</div></Col>);
+                            idx++;
+                            return (<Col key={idx} className="col-12 mb-4"><div className={c.source == 'cpu' ? 'chat-left' : 'chat-right'} dangerouslySetInnerHTML={{__html: c.message}}></div></Col>);
                         })}
                     </Row>
                     <Row className="mt-4">

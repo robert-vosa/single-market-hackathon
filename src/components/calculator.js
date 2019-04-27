@@ -7,6 +7,13 @@ class Calculator extends Component {
 
     goodsAndServices = [];
 
+    componentDidMount () {
+        const { prefill } = this.props.match.params;
+        if(prefill == "true"){
+            this.state.payer = [{ value: "AT", name: "Austria"}];
+        }
+    }
+
     constructor(props, context) {
         super(props, context);
     
@@ -66,6 +73,7 @@ class Calculator extends Component {
 
     handlePayerChange(payer, event) {
         this.setState({ payer });
+        console.log(payer)
     }
 
     handleReceiverChange(receiver, event) {
@@ -100,8 +108,6 @@ class Calculator extends Component {
             if(payerCountry == receiverCountry){
                 effectiveVAT = this.findVAT(receiverCountry);
             }else{
-                console.log(this.state.transactionType)
-                console.log(this.state.payerVATApplicable)
                 if(!this.state.payerVATApplicable){
                     effectiveVAT = this.findVAT(receiverCountry);
                 }else{
@@ -176,6 +182,7 @@ class Calculator extends Component {
                                         labelKey="name"
                                         placeholder="Choose a country..."
                                         onChange={this.handlePayerChange}
+                                        value={this.state.payer}
                                         options={this.state.countries}
                                     />
                             </Form.Row>
